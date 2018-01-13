@@ -1,4 +1,4 @@
-//CHROME VERSION
+//FIREFOX VERSION
 /*Other versions:"
 	Chrome Web Store: https://chrome.google.com/webstore/detail/steam-card-assistant/peclgodihffdabhnecgclojooijaeeeb
 	Firefox Add-ons: https://addons.mozilla.org/en-US/firefox/addon/tcno-steam-card-assistant/

@@ -1,4 +1,4 @@
-//CHROME VERSION
+//FIREFOX VERSION
 /*Other versions:"
 	Chrome Web Store: https://chrome.google.com/webstore/detail/steam-card-assistant/peclgodihffdabhnecgclojooijaeeeb
 	Firefox Add-ons: https://addons.mozilla.org/en-US/firefox/addon/tcno-steam-card-assistant/
@@ -18,7 +18,7 @@ CheckIfHTTPS();
 //Checks to see if is a "gamecards" page or a "badges" page, and acts accordingly.
 if (window.location.href.includes( "gamecards" )) {
 	var s = document.createElement( 'script' );
-	s.src = chrome.extension.getURL( 'TcNoEmbed.js' );
+	s.src = browser.extension.getURL( 'TcNoEmbed.js' );
 	s.onload = function() {
 		this.remove();
 	};
@@ -27,7 +27,7 @@ if (window.location.href.includes( "gamecards" )) {
 }
 if (window.location.href.includes( "badges" )) {
 	var s = document.createElement( 'script' );
-	s.src = chrome.extension.getURL( 'TcNoEmbed.js' );
+	s.src = browser.extension.getURL( 'TcNoEmbed.js' );
 	s.onload = function() {
 		this.remove();
 	};
