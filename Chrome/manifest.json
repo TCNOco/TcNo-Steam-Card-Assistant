@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Steam Card Assistant",
+  "author": "TechNobo (Wesley Pyburn)",
+  "description": "Extends the Steam Badge crafting system.",
+  "version": "1.0",
+  "homepage_url": "https://tcno.co/",
+  "browser_action": {
+   "default_icon": "Logo256x256.png",
+   "default_popup": "popup.html"
+  },
+  "icons": { 
+		"16": "Logo16x16.png",
+        "48": "Logo48x48.png",
+        "128": "Logo128x128.png" 
+	},
+  "web_accessible_resources": [
+    "TcNoEmbed.js"
+  ],
+   "permissions": ["notifications", "tabs", "*://*.steampowered.com/*", "*://*.steamcommunity.com/*"],
+   "content_scripts": [
+    {
+	  "run_at" :"document_end",
+      "matches": ["*://*.steamcommunity.com/id/*/badges*", "*://*.steamcommunity.com/id/*/gamecards*"],
+      "js": ["jquery-3.2.1.min.js", "sca.js"]
+    }
+  ]
+}
