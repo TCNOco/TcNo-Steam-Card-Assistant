@@ -3,16 +3,16 @@
   "name": "Steam Card Assistant",
   "author": "Wesley Pyburn",
   "description": "Extends the Steam Badge crafting system.",
-  "version": "2.0",
+  "version": "1.2",
   "homepage_url": "https://tcno.co/",
   "browser_action": {
-   "default_icon": "images/icon256x256.png",
+   "default_icon": "Logo256x256.png",
    "default_popup": "popup.html"
   },
   "icons": { 
-		"16": "images/icon16x16.png",
-        "48": "images/icon48x48.png",
-        "128": "images/icon128x128.png" 
+		"16": "Logo16x16.png",
+        "48": "Logo48x48.png",
+        "128": "Logo128x128.png" 
 	},
   "web_accessible_resources": [
     "TcNoEmbed.js"
@@ -21,7 +21,7 @@
    "content_scripts": [
     {
 	  "run_at" :"document_end",
-      "matches": ["*://*.steamcommunity.com/id/*/badges*", "*://*.steamcommunity.com/market/multibuy*", "*://*.steamcommunity.com/id/*/gamecards*"],
+      "matches": ["*://*.steamcommunity.com/id/*/badges*", "*://*.steamcommunity.com/id/*/gamecards*"],
       "js": ["jquery-3.2.1.min.js", "sca.js"]
     }
   ]
