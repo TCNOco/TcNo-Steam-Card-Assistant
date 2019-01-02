@@ -8,7 +8,6 @@ Bug reports and business enquiries: TechNobo@tcno.co
 Website: https://tcno.co/
 View this project on GitHub: https://github.com/TcNobo/TcNo-Steam-Card-Assistant
 */
-
 //Badge list multicraft link creator
 function TcNoMulticraft(link) {
 	var numberTimes = prompt("Enter how many times you want to craft the badge (Between 1 and 5): ", "");
