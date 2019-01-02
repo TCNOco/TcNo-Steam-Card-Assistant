@@ -5,6 +5,7 @@ A simple Open-source extension for Steam Badge crafting and managing.
 >### What exactly does the plugin do?
 * Forces HTTPS, because it's more secure and not always enforced by Steam on the SteamCommunity.com pages and it is nessecary for the extension to use AJAX, for crafting badges.
 * Allows users to craft multiple badges from the Steam Badge page, instead of crafting one, waiting for the refresh and so on. It shortens the unnessecarily long process to just a simple click and it's done instantly.
+* (NEW 2019) Purchase badge sets in groups of 5, making mass crafting even easier.
 * Allows users to craft multiple badges from the Steam Badge List page, so that they don't have to go into specific pages and craft them from there, they can craft multiple badges form many different games more quickly than doing it from their respective pages.
 
 >### Why?
