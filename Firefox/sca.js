@@ -37,17 +37,21 @@ if (window.location.href.includes("multibuy")){
 		this.remove();
 	};
 	(document.head || document.documentElement).appendChild(s);
-	$( document ).ready(function() {
-		MultiBuyPage();
-	});
+	MultiBuyPage();
 }
 
 function MultiBuyPage() {
 	var tSSA = jQuery('#market_multi_accept_ssa').prop('checked');
 	var originalPriceString = jQuery('#market_multibuy_order_total')[0].innerHTML
-	var priceOfOne = Number(originalPriceString .replace(/[^0-9\.]+/g,""))
-	var priceOfFive = priceOfOne*5;
-	var afterPrice = originalPriceString.replace(priceOfOne, priceOfFive)
+	// Inaccurate price finder, if one set to 0 or another number. var priceOfOne = Number(originalPriceString .replace(/[^0-9\.]+/g,""))
+	var priceAtBottom = parseFloat(Number(originalPriceString .replace(/[^0-9\.]+/g,""))).toFixed(2);
+	var priceOfOne = 0;
+	jQuery('.market_multi_price').each( function() {
+		priceOfOne += Number(jQuery(this).val() .replace(/[^0-9\.]+/g,""));
+	});
+
+	var priceOfFive = parseFloat(priceOfOne*5).toFixed(2); //Added to stop the rare really long, unnessecary numbers.
+	var afterPrice = originalPriceString.replace(priceAtBottom, priceOfFive)
 	console.log('Original price: ' + originalPriceString)
 	console.log('Price of FIVE: ' + afterPrice)
 
@@ -65,7 +69,7 @@ function MultiBuyPage() {
 				jQuery("input.market_multi_quantity"), function(){
 					jQuery(this).val('5');
 				});
-			jQuery('#market_multibuy_purchase').click();
+			window.location.href = "javascript:$('market_multibuy_purchase').click()";
 		}
 	});
 }
@@ -85,7 +89,7 @@ function IndividualPage() {
 			jQuery("div.badge_info").css({ "min-width": "328px"});
 			jQuery("div.badge_current").css({ "margin-top": "41px"});
 		}
-		
+
 		var buttonsHTML = jQuery("div.gamecard_badge_craftbtn_ctn").html();
 		var craftLink = jQuery("div.badge_craft_button").attr("onclick");
 		var craftTimes = jQuery("div.badge_card_set_text_qty").html().substring(1,2);
@@ -97,13 +101,20 @@ function IndividualPage() {
 		});
 		
 		var newCraftLink = "";
+
+		var execcomm = "javascript:";
 		for (i = 0; i < craftTimes; i++) { 
-			newCraftLink += craftLink;
+			execcomm += craftLink;
 		}
+		execcomm += 'setTimeout(function(){location.reload();},2000);';
+		execcomm = execcomm.replace(new RegExp('\'', 'g'), '\\\'');
+		newCraftLink = 'window.location.href = \''+execcomm+'\'';
+
 		var newButtonHTML = jQuery("div.badge_craft_button").outerHTML().replace(craftLink, newCraftLink).replace(jQuery("div.badge_craft_button").html(), "Craft " + craftTimes + " Badge(s)");
-		newButtonHTML = newButtonHTML.replace('<div class="', '<style type="text/css">.TcNoButton {background-color:green;border: 1px solid lightgreen;margin-left:5px;} .TcNoButton:hover {background-color:#00b300;border-color:green;}</style><div class="TcNoButton ');
+		newButtonHTML = newButtonHTML.replace('<div class="', '<style type="text/css">.TcNoButton {background-color:green;border: 1px solid lightgreen;margin-left:5px;} .TcNoButton:hover {background-color:#00b300;border-color:green;}</style><div id="tcnoBuyButton" class="TcNoButton ');
 		var buttonHTMLIncluded = buttonsHTML.replace('<div style="clear: left;"></div>',newButtonHTML + '<div style="clear: left;"></div>');
 		jQuery("div.gamecard_badge_craftbtn_ctn").html(buttonHTMLIncluded);
+
 		console.log("Multiple card button added!");
 	}else{console.log("Multiple card button NOT added!");}
 	

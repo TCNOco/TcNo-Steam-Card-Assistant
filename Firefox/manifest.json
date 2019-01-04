@@ -3,7 +3,7 @@
   "name": "Steam Card Assistant",
   "author": "Wesley Pyburn",
   "description": "Extends the Steam Badge crafting system.",
-  "version": "2.0",
+  "version": "2.1",
   "homepage_url": "https://tcno.co/",
   "browser_action": {
    "default_icon": "images/icon256x256.png",
