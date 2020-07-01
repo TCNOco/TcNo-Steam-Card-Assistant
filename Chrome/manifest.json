@@ -23,7 +23,7 @@
   "web_accessible_resources": [
     "TcNoEmbed.js"
   ],
-   "permissions": ["notifications", "tabs", "*://*.steampowered.com/*", "*://*.steamcommunity.com/*"],
+   "permissions": ["tabs", "*://*.steampowered.com/*", "*://*.steamcommunity.com/*"],
    "content_scripts": [
     {
 	  "run_at" :"document_end",
