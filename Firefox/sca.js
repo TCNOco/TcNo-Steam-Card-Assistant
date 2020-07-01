@@ -9,7 +9,7 @@ Website: https://tcno.co/
 View this project on GitHub: https://github.com/TcNobo/TcNo-Steam-Card-Assistant
 */
 
-var console_info = ["%c TcNo SteamCardAssistant %cby TechNobo (Wesley Pyburn) %chttps://tcno.co/ ", 'background: #222; color: white','background: #222; color: #bada55','background: #222; color: lightblue'];
+var console_info = ["%c TcNo Steam Card Assistant %cby TechNobo (Wesley Pyburn) %chttps://tcno.co/ ", 'background: #222; color: white','background: #222; color: #bada55','background: #222; color: lightblue'];
 console.log.apply(console, console_info);
 
 if (window.location.href.includes("gamecards")){
@@ -55,11 +55,12 @@ function MultiBuyPage() {
 	console.log('Original price: ' + originalPriceString)
 	console.log('Price of FIVE: ' + afterPrice)
 
-	//Add the button
+	// Add the button
 	jQuery('.market_multibuy h2').after('<a id="tcnoBuy5" class="btn_green_white_innerfade btn_medium_wide btn_uppercase market_unstyled_button" style="float: right; text-align: right; display: inline-block;"><span>Buy 5 of each (' + afterPrice + ')</span></a>')
-	//Keep the Steam Subscriber Agreement as it was before init. We won't accept it on your behalf, it's your job to do that.
+	jQuery('.market_multibuy h2').after('<a id="tcnoRoundUp" class="btn_green_white_innerfade btn_medium_wide btn_uppercase market_unstyled_button" style="float: right; text-align: right; display: inline-block;margin-left:5px;"><span>Round up all</span></a>')
+	// Keep the Steam Subscriber Agreement as it was before init. We won't accept it on your behalf, it's your job to do that.
 	jQuery('#market_multi_accept_ssa').prop('checked', tSSA)
-	//Change all values to 5
+	// Change all values to 5
 	jQuery('#tcnoBuy5').click( function(e) {
 		if (!jQuery('#market_multi_accept_ssa').prop('checked')){
 			alert('Accept the "Steam Subscriber Agreement" at the bottom of the page first to use this button!')
@@ -72,13 +73,25 @@ function MultiBuyPage() {
 			window.location.href = "javascript:$('market_multibuy_purchase').click()";
 		}
 	});
+	// Round up prices
+	jQuery("#tcnoRoundUp").click( function(e){
+		e.preventDefault();
+		jQuery.each(
+			jQuery("input.market_multi_price"), function(){
+				var value = 0;
+				jQuery(this).val().split(" ").forEach(function (e){value = (!isNaN(Math.abs(e)) ? e : value)})
+				jQuery(this).val(Math.ceil(value));
+				jQuery(this).select();
+		});
+		jQuery("body").select();
+	});
 }
 
 function IndividualPage() {
-	//COMPLETE FOR INDIVIDUAL PAGES
-	//add to steamcommunity.com/id/*xyz*/gamecards/*381140*/
+	// COMPLETE FOR INDIVIDUAL PAGES
+	// Add to steamcommunity.com/id/*xyz*/gamecards/*381140*/
 	if (jQuery('div.badge_craft_button').length) {
-		//define outerHTML function
+		// Define outerHTML function
 		jQuery.fn.outerHTML = function(){return (!this.length) ? this : (this[0].outerHTML || (function(el){var div = document.createElement('div');div.appendChild(el.cloneNode(true));var contents = div.innerHTML;div = null;return contents;})(this[0]));}
 		
 		if (jQuery('div.badge_info_description').length) {
@@ -111,42 +124,65 @@ function IndividualPage() {
 		newCraftLink = 'window.location.href = \''+execcomm+'\'';
 
 		var newButtonHTML = jQuery("div.badge_craft_button").outerHTML().replace(craftLink, newCraftLink).replace(jQuery("div.badge_craft_button").html(), "Craft " + craftTimes + " Badge(s)");
-		newButtonHTML = newButtonHTML.replace('<div class="', '<style type="text/css">.TcNoButton {background-color:green;border: 1px solid lightgreen;margin-left:5px;} .TcNoButton:hover {background-color:#00b300;border-color:green;}</style><div id="tcnoBuyButton" class="TcNoButton ');
+		newButtonHTML = newButtonHTML.replace('<div class="', '<style type="text/css">.TcNoButton {float: left;padding:0px 15px;height: 68px!important;background-color:green;border: 1px solid lightgreen;margin-left:5px;} .TcNoButton:hover {background-color:#00b300;border-color:green;}</style><div id="tcnoBuyButton" class="TcNoButton ');
 		var buttonHTMLIncluded = buttonsHTML.replace('<div style="clear: left;"></div>',newButtonHTML + '<div style="clear: left;"></div>');
 		jQuery("div.gamecard_badge_craftbtn_ctn").html(buttonHTMLIncluded);
 
 		console.log("Multiple card button added!");
 	}else{console.log("Multiple card button NOT added!");}
 	
-	//Open all cards in new tab button:
+	// Open all cards in new tab button:
 	var textLocation = jQuery('div.badge_card_to_collect_header').parent();
-	jQuery('div.badge_card_to_collect_header').parent().html('<a href="javascript:OpenAllMarket()" style="display: inline-block;margin-left:10px" class="btn_grey_grey btn_medium"><span>Open all market links</span></a>' + jQuery('div.badge_card_to_collect_header').parent().html());
+	jQuery('div.gamecards_inventorylink').prepend('<a href="javascript:OpenAllMarket()" style="display: inline-block" class="btn_grey_grey btn_medium"><span>Open all market links</span></a>');
 	jQuery('div.badge_card_to_collect_header').css({ "display": "inline-block"});
 }
 
-//used on the badge list page
+// Used on the badge list page
 function BadgeListPage() {
-	//Cards on the /badges/ page:
-	//Remove one of the 5 cards (to make space)
-	//OuterHTML ability
+	// Cards on the /badges/ page:
+	// Remove one of the 5 cards (to make space)
+	// OuterHTML ability
 	jQuery.fn.outerHTML = function(){return (!this.length) ? this : (this[0].outerHTML || (function(el){var div = document.createElement('div');div.appendChild(el.cloneNode(true));var contents = div.innerHTML;div = null;return contents;})(this[0]));}
-	//for each badge_cards, adds another DIV to get rid of the last card
+	// for each badge_cards, adds another DIV to get rid of the last card
 	jQuery("div.badge_cards").each(function() {
 		jQuery(this).html(jQuery(this).outerHTML().replace('<div','<div style="max-width:400px;overflow:hidden;"><div style="min-width:526px;"') + '</div>');
 	});
 	
+	// Add individual buttons
+	var TcNoMulticraftNumbers = "";
+	var TcNoMulticraftTotal = 0;
 	jQuery("div.badge_progress_info").each(function() {
 		if (jQuery(this).find("a[href]").attr('href')){
 			var cardLink = jQuery(this).find("a[href]").attr('href');
+			var gameNumber = cardLink.substring(0, cardLink.length-1);
+			gameNumber = gameNumber.substring(gameNumber.lastIndexOf("/")+1, gameNumber.length);
+			TcNoMulticraftNumbers += gameNumber + ',';
+			TcNoMulticraftTotal++;
 			var oldButton = jQuery(this).html();
 			var newButton = oldButton.replace(cardLink,"javascript:TcNoMulticraft('" + cardLink + "')").replace(jQuery(oldButton).html(), "Multiple");
 			newButton = newButton.replace('class="badge_craft_button"','')
 			newButton = newButton.replace('<a ', '<a class="badge_craft_button TcNoButton" ');
-			newButton = '<style type="text/css">.TcNoButton {background-color:green;border: 1px solid lightgreen;margin-left:5px;} .TcNoButton:hover {background-color:#00b300;border-color:green;}</style>' + newButton;
 			newButton = newButton.replace('href', 'style="min-width: 92px;display:inline-block;" href');
 			oldButton = oldButton.replace('href', 'style="min-width: 92px;max-width: 92px;display:inline-block;" href');
 			jQuery(this).html(newButton + oldButton);
 		}
 		jQuery(this).css({ "min-width": "210px"});
 	});
+
+	if (TcNoMulticraftTotal > 0){
+		// Add styles to head
+		jQuery("head").append('<style type="text/css">.TcNoButton {background-color:green;border: 1px solid lightgreen;margin-left:5px;} .TcNoButton:hover {background-color:#00b300;border-color:green;}</style>');
+	
+		// Add "Craft 1 of all" buttons after XP bar
+		jQuery("div.profile_xp_block").after(
+			'<style type="text/css">.craft_all_block{display: flex;position: relative;justify-content: space-between;align-items: center;background-color: hsl(220,4.9%,12%);margin-bottom: 24px;border-radius: 4px;border-width: 1px;border-style: solid;border-image: initial;border-color: hsl(330,4%,9.8%) hsl(240,1.2%,32.2%) hsl(240,1.2%,32.2%) hsl(330,4%,9.8%);padding: 20px;}</style>' + 
+			'<div class="craft_all_block"><div style="float: left;color:white;"><span><a href="https://tcno.co/" target="_blank">TcNo Steam Card Assistant</a></span></div><div><span>Will craft: ' + TcNoMulticraftTotal + ' badges</span></div><div style="float:right;"><a class="badge_craft_button TcNoButton" style="padding:0px 10px;display:inline-block;" href="javascript:TcNoMulticraftOneOfEach()">Craft 1 of each</a></div></div>'
+		);
+		// Add list of all links to the page.
+		jQuery("div.profile_xp_block").after('<script>var TcNoMulticraftNumbers = [' + TcNoMulticraftNumbers + ']</script>');
+		console_info = ["%c TcNo Steam Card Assistant: %cDisplaying 'craft 1 of all' button that will craft: " + TcNoMulticraftTotal + " badges", 'background: #222; color: white','background: #222; color: #bada55'];
+	}else{
+		console_info = ["%c TcNo Steam Card Assistant: %cDid not show 'craft 1 of all', as no badges available", 'background: #222; color: white','background: #222; color: #F55'];
+	}
+	console.log.apply(console, console_info);
 }
