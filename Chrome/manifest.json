@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Steam Card Assistant",
   "description": "Extends the Steam Badge crafting system by crafting multiple badges at once, as well as other useful features.",
-  "version": "2.2",
+  "version": "2.3",
   "homepage_url": "https://tcno.co/",
 
   "browser_action": {
