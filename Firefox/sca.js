@@ -145,17 +145,23 @@ function BadgeListPage() {
 	jQuery.fn.outerHTML = function(){return (!this.length) ? this : (this[0].outerHTML || (function(el){var div = document.createElement('div');div.appendChild(el.cloneNode(true));var contents = div.innerHTML;div = null;return contents;})(this[0]));}
 	// for each badge_cards, adds another DIV to get rid of the last card
 	jQuery("div.badge_cards").each(function() {
-		jQuery(this).html(jQuery(this).outerHTML().replace('<div','<div style="max-width:400px;overflow:hidden;"><div style="min-width:526px;"') + '</div>');
+		if (jQuery(this).parent().find(".badge_craft_button:last").attr("href")) jQuery(this).html(jQuery(this).outerHTML().replace('<div','<div style="max-width:400px;overflow:hidden;"><div style="min-width:526px;"') + '</div>');
 	});
 	
 	// Add individual buttons
 	var TcNoMulticraftNumbers = "";
 	var TcNoMulticraftTotal = 0;
 	jQuery("div.badge_progress_info").each(function() {
-		if (jQuery(this).find("a[href]").attr('href')){
-			var cardLink = jQuery(this).find("a[href]").attr('href');
+		if (jQuery(this).find(".badge_craft_button:last").attr("href")){
+			var cardLink = jQuery(this).find(".badge_craft_button:last").attr("href");
 			var gameNumber = cardLink.substring(0, cardLink.length-1);
-			gameNumber = gameNumber.substring(gameNumber.lastIndexOf("/")+1, gameNumber.length);
+			if (!gameNumber.includes("?")) gameNumber = gameNumber.substring(gameNumber.lastIndexOf("/")+1, gameNumber.length);
+			else{
+				var t = gameNumber.split("/");
+				gameNumber = t[t.length-2];
+				console.log(gameNumber);
+			}
+			
 			TcNoMulticraftNumbers += gameNumber + ',';
 			TcNoMulticraftTotal++;
 			var oldButton = jQuery(this).html();
@@ -165,8 +171,8 @@ function BadgeListPage() {
 			newButton = newButton.replace('href', 'style="min-width: 92px;display:inline-block;" href');
 			oldButton = oldButton.replace('href', 'style="min-width: 92px;max-width: 92px;display:inline-block;" href');
 			jQuery(this).html(newButton + oldButton);
+			jQuery(this).css({ "min-width": "210px"});
 		}
-		jQuery(this).css({ "min-width": "210px"});
 	});
 
 	if (TcNoMulticraftTotal > 0){
