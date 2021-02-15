@@ -1,4 +1,23 @@
-![TcNo Steam Card Assistant Logo](https://github.com/TcNobo/TcNo-Steam-Card-Assistant/raw/master/Chrome-Marquee.png "TcNo Steam Card Assistant")
+<p align="center">
+  <a href="https://tcno.co/">
+    <img src="/Chrome-Marquee.png"></a>
+</p>
+<p align="center">
+ <a href="https://chrome.google.com/webstore/detail/steam-card-assistant/peclgodihffdabhnecgclojooijaeeeb">
+    <img alt="Chrome Web Store" src="https://img.shields.io/chrome-web-store/users/peclgodihffdabhnecgclojooijaeeeb?logo=google%20chrome&logoColor=white&style=flat-square"></a>
+ <a href="https://addons.mozilla.org/en-US/firefox/addon/tcno-steam-card-assistant/">
+    <img alt="Mozilla Add-on" src="https://img.shields.io/amo/users/tcno-steam-card-assistant?logo=firefox%20browser&style=flat-square"></a>
+  <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/TcNobo/TcNo-Rust-Drop-Assistant/total?logo=GitHub&style=flat-square">
+  <a href="https://tcno.co/">
+    <img alt="Website" src="/web.svg" height=20"></a>
+  <a href="https://s.tcno.co/RustDropDiscord">
+    <img alt="Discord server" src="https://img.shields.io/discord/217649733915770880?label=Discord&logo=discord&style=flat-square"></a>
+  <a href="https://twitter.com/TcNobo">
+    <img alt="Twitter" src="https://img.shields.io/twitter/follow/TcNobo?label=Follow%20%40TcNobo&logo=Twitter&style=flat-square"></a>
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/TcNobo/TcNo-Steam-Card-Assistant?logo=GitHub&style=flat-square">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/TcNobo/TcNo-Steam-Card-Assistant?logo=GitHub&style=flat-square">
+</p>
+                                                                                                                                         
 # TcNo-Steam-Card-Assistant 
 A simple Open-source extension for Steam Badge crafting and managing.
 
