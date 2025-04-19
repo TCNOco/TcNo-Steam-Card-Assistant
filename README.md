@@ -39,10 +39,9 @@ I find this plugin very useful, and I'm quite sure that other people will feel t
 #### Firefox: [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/tcno-steam-card-assistant/ "Firefox Add-ons")
 
 >### Where to find me:
-* Bug reports and suggestions: TechNobo@tcno.co (or via Discord)
+* Bug reports and suggestions: TroubleChute@tcno.co (or via Discord)
 * Discord: https://discord.gg/Aj6RrKh
-* Steam: [TechNobo on Steam](https://steamcommunity.com/id/ceilingfan69/ "TechNobo on Steam")
-* YouTube: [TechNobo on YouTube](https://youtube.com/TechNobo/ "TechNobo on YouTube")
-* Website: [tcno.co](https://tcno.co/ "TechNobo's Website")
+* YouTube: [TroubleChute on YouTube](https://youtube.com/TroubleChute/ "TroubleChute on YouTube")
+* Website: [tcno.co](https://tcno.co/ "TroubleChute's Website")
 
 For bug reports and suggestions, please either email me or use the Issues tab on the GitHub repository.
