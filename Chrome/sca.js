@@ -14,7 +14,7 @@ console.log.apply(console, console_info);
 
 if (window.location.href.includes("gamecards")){
 	var s = document.createElement('script');
-	s.src = chrome.extension.getURL('TcNoEmbed.js');
+	s.src = chrome.runtime.getURL('TcNoEmbed.js');
 	s.onload = function() {
 		this.remove();
 	};
@@ -23,7 +23,7 @@ if (window.location.href.includes("gamecards")){
 }
 if (window.location.href.includes("badges")){
 	var s = document.createElement('script');
-	s.src = chrome.extension.getURL('TcNoEmbed.js');
+	s.src = chrome.runtime.getURL('TcNoEmbed.js');
 	s.onload = function() {
 		this.remove();
 	};
@@ -32,7 +32,7 @@ if (window.location.href.includes("badges")){
 }
 if (window.location.href.includes("multibuy")){
 	var s = document.createElement('script');
-	s.src = chrome.extension.getURL('TcNoEmbed.js');
+	s.src = chrome.runtime.getURL('TcNoEmbed.js');
 	s.onload = function() {
 		this.remove();
 	};
@@ -62,16 +62,13 @@ function MultiBuyPage() {
 	jQuery('#market_multi_accept_ssa').prop('checked', tSSA)
 	// Change all values to 5
 	jQuery('#tcnoBuy5').click( function(e) {
-		if (!jQuery('#market_multi_accept_ssa').prop('checked')){
-			alert('Accept the "Steam Subscriber Agreement" at the bottom of the page first to use this button!')
-		}else{
-			e.preventDefault();
-			jQuery.each(
-				jQuery("input.market_multi_quantity"), function(){
-					jQuery(this).val('5');
-				});
-			window.location.href = "javascript:$('market_multibuy_purchase').click()";
-		}
+		e.preventDefault();
+		jQuery.each(
+			jQuery("input.market_multi_quantity"), function(){
+				jQuery(this).val('5');
+			});
+		// scroll the agreement and buy button into view
+		jQuery('#market_multibuy_purchase')[0]?.scrollIntoView();
 	});
 	// Round up prices
 	jQuery("#tcnoRoundUp").click( function(e){
@@ -79,6 +76,7 @@ function MultiBuyPage() {
 		jQuery.each(
 			jQuery("input.market_multi_price"), function(){
 				var value = 0;
+				// does not function properly for a lot of currencies
 				jQuery(this).val().split(" ").forEach(function (e){value = (!isNaN(Math.abs(e)) ? e : value)})
 				jQuery(this).val(Math.ceil(value));
 				jQuery(this).select();
