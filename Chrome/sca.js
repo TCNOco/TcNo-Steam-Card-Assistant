@@ -69,6 +69,14 @@ function MultiBuyPage() {
 			});
 		// scroll the agreement and buy button into view
 		jQuery('#market_multibuy_purchase')[0]?.scrollIntoView();
+		// immediately make them buy it (disabled for now, was previous behavior before MV3)
+		// setTimeout(() => {
+		// 	if (!jQuery('#market_multi_accept_ssa').prop('checked')) {
+		// 		alert('Accept the "Steam Subscriber Agreement" in order to use "Buy!')
+		// 	} else {
+		// 		jQuery('#market_multibuy_purchase')[0]?.click();
+		// 	}
+		// }, 250);
 	});
 	// Round up prices
 	jQuery("#tcnoRoundUp").click( function(e){
